@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0d6c4531b8a3843a6fbb9cb6aded21, type: 3}
+  m_Name: Outfit-1
+  m_EditorClassIdentifier: 
+  itemName: Armor Set
+  itemSprite: {fileID: 219960815, guid: 91ede783cd4a9dc498c4e16bf4b62a72, type: 3}
+  itemPrice: 50
+  itemType: 0
