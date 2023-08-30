@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    public static event Action OnInventoryInputPressed;
     private PlayerControls playerInputs;
     private Animator animator;
 
@@ -24,16 +25,24 @@ public class PlayerBehaviour : MonoBehaviour
         playerInputs.PlayerMove.Move.started += OnMoveInput;
         playerInputs.PlayerMove.Move.performed += OnMoveInput;
         playerInputs.PlayerMove.Move.canceled += OnMoveInput;
-    }
 
-    private void OnMoveInput(InputAction.CallbackContext context)
-    {
-        moveDirection = context.ReadValue<Vector2>();
+        playerInputs.PlayerMove.Inventory.started += OnInventoryInput;
+        playerInputs.PlayerMove.Inventory.started += OnInventoryInput;
     }
 
     private void Update()
     {
         MoveHandler();
+    }
+
+    private void OnInventoryInput(InputAction.CallbackContext context)
+    {
+        OnInventoryInputPressed?.Invoke();
+    }
+
+    private void OnMoveInput(InputAction.CallbackContext context)
+    {
+        moveDirection = context.ReadValue<Vector2>();
     }
 
     private void MoveHandler()

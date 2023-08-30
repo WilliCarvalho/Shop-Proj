@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ShopItemDisplay : MonoBehaviour
 {
-    public event Action<ShopItem> OnTryBuySellItem;
+    public event Action<ShopItem> OnTryBuySellEquipItem;
 
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemPrice;
@@ -21,7 +21,7 @@ public class ShopItemDisplay : MonoBehaviour
 
     private void TryBuySellItem()
     {
-        OnTryBuySellItem?.Invoke(item);
+        OnTryBuySellEquipItem?.Invoke(item);
         Destroy(this.gameObject);
     }
 

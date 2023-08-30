@@ -11,7 +11,8 @@ public enum ItemType
 public enum ItemState
 {
     ToBuy,
-    Tosell
+    Tosell,
+    ToEquip,
 }
 
 [CreateAssetMenu(fileName = "Shop Item", menuName = "Shop Item/New shop item")]

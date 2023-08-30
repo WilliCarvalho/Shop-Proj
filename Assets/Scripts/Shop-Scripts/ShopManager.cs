@@ -39,7 +39,7 @@ public class ShopManager : MonoBehaviour
         {
            if (lastBuySellItem != null && lastBuySellItem != shopItem) continue;
             ShopItemDisplay itemDisplay = Instantiate(shopItemDisplayprefab, BuyItemDisplayContainer);
-            itemDisplay.OnTryBuySellItem += CheckItem;
+            itemDisplay.OnTryBuySellEquipItem += CheckItem;
             itemDisplay.PopulateDisplay(shopItem);
             shopItem.SetItemState(ItemState.ToBuy);
         }
@@ -51,7 +51,7 @@ public class ShopManager : MonoBehaviour
         {
             if (lastBuySellItem != null && lastBuySellItem != item) continue;
             ShopItemDisplay itemDisplay = Instantiate(shopItemDisplayprefab, SellItemDisplayContainer);
-            itemDisplay.OnTryBuySellItem += CheckItem;
+            itemDisplay.OnTryBuySellEquipItem += CheckItem;
             itemDisplay.PopulateDisplay(item);
             item.SetItemState(ItemState.Tosell);
         }

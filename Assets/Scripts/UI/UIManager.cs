@@ -17,12 +17,13 @@ public class UIManager : MonoBehaviour
     private void SetupUI()
     {
         ChangeShopUIState(false);
-        changeInventoryUIState(false);
+        InventoryUI.SetActive(false);
     }
 
     private void SetupListeners()
     {
         ShopKeeper.OnNearShopKeeper += ChangeShopUIState;
+        PlayerBehaviour.OnInventoryInputPressed += ChangeInventoryUIState;
     }
 
     private void ChangeShopUIState(bool value)
@@ -30,8 +31,15 @@ public class UIManager : MonoBehaviour
         ShopUI.SetActive(value);
     }
 
-    private void changeInventoryUIState(bool value)
+    private void ChangeInventoryUIState()
     {
-        InventoryUI.SetActive(value);
+        if (InventoryUI.active)
+        {
+            InventoryUI.SetActive(false);
+        }
+        else
+        {
+            InventoryUI.SetActive(true);
+        }
     }
 }

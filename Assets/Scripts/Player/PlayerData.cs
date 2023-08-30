@@ -10,14 +10,22 @@ public class PlayerData : MonoBehaviour
     public static event Action<List<ShopItem>> OnInventoryChange;
 
     [SerializeField] private Inventory playerInventory;
+    [SerializeField] private SpriteRenderer OutfitSpriteRenderer;
+    [SerializeField] private SpriteRenderer HeadSpriteRenderer;
 
-    private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
         moneyBalance += 999;
         ShopManager.OnShopItemPurchased += AddItemToInventory;
         ShopManager.OnShopItemSelled += RemoveItemfromInventory;
+        PlayerInventoryManager.OnItemEquipped += EquipNewItemToPlayer;
+    }
+
+
+    private void Start()
+    {
+        OnInventoryChange?.Invoke(playerInventory.GetItems());
     }
 
     private void AddItemToInventory(ShopItem item)
@@ -36,14 +44,26 @@ public class PlayerData : MonoBehaviour
         SetPlayerMoneyBalance(item.GetItemPrice() / 2);
     }
 
+    private void EquipNewItemToPlayer(ShopItem item)
+    {
+        switch (item.GetItemType())
+        {
+            case ItemType.Outfit:
+                OutfitSpriteRenderer.sprite = item.GetItemSprite();
+                break;
+            case ItemType.Head:
+                HeadSpriteRenderer.sprite = item.GetItemSprite();
+                break;
+            default:
+                break;
+        }
+    }
+
     public void SetPlayerMoneyBalance(float newBalance)
     {
         moneyBalance += newBalance;
         OnMoneyBalanceChange?.Invoke(moneyBalance);
     }
 
-    public List<ShopItem> GetplayerItems()
-    {
-        return playerInventory.GetItems();
-    }
+    public List<ShopItem> GetplayerItems() => playerInventory.GetItems();
 }

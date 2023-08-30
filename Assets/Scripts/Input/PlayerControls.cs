@@ -35,6 +35,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""4abbab81-d3e3-4795-a2f9-7d0d487b2905"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -103,6 +112,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b711002-45c6-424a-9c21-0ec477da1b21"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd477822-404c-414a-a29a-01f7ac42596c"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -112,6 +143,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // PlayerMove
         m_PlayerMove = asset.FindActionMap("PlayerMove", throwIfNotFound: true);
         m_PlayerMove_Move = m_PlayerMove.FindAction("Move", throwIfNotFound: true);
+        m_PlayerMove_Inventory = m_PlayerMove.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -172,11 +204,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerMove;
     private IPlayerMoveActions m_PlayerMoveActionsCallbackInterface;
     private readonly InputAction m_PlayerMove_Move;
+    private readonly InputAction m_PlayerMove_Inventory;
     public struct PlayerMoveActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerMoveActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerMove_Move;
+        public InputAction @Inventory => m_Wrapper.m_PlayerMove_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMove; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -189,6 +223,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_PlayerMoveActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerMoveActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_PlayerMoveActionsCallbackInterface.OnMove;
+                @Inventory.started -= m_Wrapper.m_PlayerMoveActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_PlayerMoveActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_PlayerMoveActionsCallbackInterface.OnInventory;
             }
             m_Wrapper.m_PlayerMoveActionsCallbackInterface = instance;
             if (instance != null)
@@ -196,6 +233,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
             }
         }
     }
@@ -203,5 +243,6 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     public interface IPlayerMoveActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }
