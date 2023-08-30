@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInventoryManager : MonoBehaviour
@@ -9,28 +10,29 @@ public class PlayerInventoryManager : MonoBehaviour
     [SerializeField] private Transform InventoryContainer;
     [SerializeField] private ShopItemDisplay InventoryItemPrefab;
 
-    private List<ShopItem> currentInventoryItems;
+    private List<ShopItem> currentInventoryItems = new List<ShopItem>();
 
     private void Awake()
     {
+        print(currentInventoryItems.Count);
         PlayerData.OnInventoryChange += UploadInventoryItems;
     }
 
     private void UploadInventoryItems(List<ShopItem> list)
     {
-        print(list.Count);
         foreach (ShopItem item in list)
         {
-            if (currentInventoryItems != null && currentInventoryItems.Contains(item)) continue;
+            if ((currentInventoryItems.Count == 0 && currentInventoryItems.Contains(item)) || currentInventoryItems.Contains(item)) continue;
             ShopItemDisplay itemDisplay = Instantiate(InventoryItemPrefab, InventoryContainer);
             itemDisplay.OnTryBuySellEquipItem += OnInventoryItemEquip;
             itemDisplay.PopulateDisplay(item);
+            currentInventoryItems.Add(item);
         }
-        currentInventoryItems = list;
     }
 
     public void OnInventoryItemEquip(ShopItem item)
     {
+        currentInventoryItems.Remove(item);
         OnItemEquipped?.Invoke(item);
     }
 }

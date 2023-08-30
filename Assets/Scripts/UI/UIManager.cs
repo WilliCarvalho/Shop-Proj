@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
 
     private void ChangeShopUIState(bool value)
     {
+        if (value == true) InventoryUI.SetActive(false);
         ShopUI.SetActive(value);
     }
 

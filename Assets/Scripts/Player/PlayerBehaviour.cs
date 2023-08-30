@@ -33,7 +33,9 @@ public class PlayerBehaviour : MonoBehaviour
     private void Update()
     {
         MoveHandler();
+        AnimationHandler();
     }
+
 
     private void OnInventoryInput(InputAction.CallbackContext context)
     {
@@ -48,6 +50,24 @@ public class PlayerBehaviour : MonoBehaviour
     private void MoveHandler()
     {
         transform.Translate(moveDirection * velocity * Time.deltaTime);
+    }
+
+    private void AnimationHandler()
+    {
+        //float directionXParameter = animator.GetFloat("directionX");
+        //float directionyParameter = animator.GetFloat("directionY");
+        //bool isMovingParameter = animator.GetBool("isMoving");
+        bool isMoving = moveDirection.x !=0 || moveDirection.y !=0;        
+        if (isMoving)
+        {
+            animator.SetFloat("directionX", moveDirection.x);
+            animator.SetFloat("directionY", moveDirection.y);
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
     }
 
     private void OnEnable()

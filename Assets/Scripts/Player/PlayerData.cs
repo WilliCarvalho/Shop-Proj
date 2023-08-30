@@ -57,6 +57,7 @@ public class PlayerData : MonoBehaviour
             default:
                 break;
         }
+        playerInventory.GetItems().Remove(item);
     }
 
     public void SetPlayerMoneyBalance(float newBalance)
