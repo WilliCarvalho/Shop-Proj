@@ -1,16 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopItemDisplay : MonoBehaviour
 {
+    public event Action<ShopItem> OnTryBuySellItem;
+
     [SerializeField] private TextMeshProUGUI itemName;
     [SerializeField] private TextMeshProUGUI itemPrice;
     [SerializeField] private Image itemImage;
+    [SerializeField] private Button buyButton;
 
     public ShopItem item { get; private set; }
+
+    private void Awake()
+    {
+        buyButton.onClick.AddListener(TryBuySellItem);
+    }
+
+    private void TryBuySellItem()
+    {
+        OnTryBuySellItem?.Invoke(item);
+        Destroy(this.gameObject);
+    }
 
     public void PopulateDisplay(ShopItem item)
     {
@@ -19,4 +32,6 @@ public class ShopItemDisplay : MonoBehaviour
         this.itemImage.sprite = item.GetItemSprite();
         this.item = item;
     }
+
+    public Button GetItemButton() => buyButton;
 }

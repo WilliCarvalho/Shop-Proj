@@ -5,7 +5,13 @@ using UnityEngine;
 public enum ItemType
 {
     Outfit,
-    Head,
+    Head
+}
+
+public enum ItemState
+{
+    ToBuy,
+    Tosell
 }
 
 [CreateAssetMenu(fileName = "Shop Item", menuName = "Shop Item/New shop item")]
@@ -15,10 +21,13 @@ public class ShopItem : ScriptableObject
     [SerializeField] private Sprite itemSprite;
     [SerializeField] private float itemPrice;
     [SerializeField] private ItemType itemType;
+    private ItemState itemState;
 
     public string GetItemName() => itemName;
     public Sprite GetItemSprite() => itemSprite;
     public float GetItemPrice() => itemPrice;
     public ItemType GetItemType() => itemType;
+    public ItemState GetItemState() => itemState;
+    public void SetItemState(ItemState state) => itemState = state;
 
 }

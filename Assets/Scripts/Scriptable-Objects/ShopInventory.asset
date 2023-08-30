@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f715a44e3f546545ad2cdb6893a19d8, type: 3}
   m_Name: ShopInventory
   m_EditorClassIdentifier: 
-  coinBalance: 100
+  items:
+  - {fileID: 11400000, guid: a0d51b038ff91084cbe0f4db6495b2b9, type: 2}
+  - {fileID: 11400000, guid: 53bac2bfbe4fd6545a502443c49fcc60, type: 2}
+  - {fileID: 11400000, guid: b143e8d5b9621d0469879ab94dc1ddcb, type: 2}
+  - {fileID: 11400000, guid: 586878622fc90bf40a8c2982dca314b0, type: 2}

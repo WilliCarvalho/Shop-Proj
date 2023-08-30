@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Inventory", menuName = "Inventory/New Inventory")]
 public class Inventory : ScriptableObject
 {
-    [SerializeField] private float coinBalance;
-    [SerializeField] public List<ShopItem> items { get; private set; } = new List<ShopItem>();
+    [SerializeField] private List<ShopItem> items = new List<ShopItem>();
+
+    public List<ShopItem> GetItems() => items;
 }
