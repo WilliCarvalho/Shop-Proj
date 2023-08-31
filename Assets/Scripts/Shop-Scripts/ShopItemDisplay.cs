@@ -34,4 +34,9 @@ public class ShopItemDisplay : MonoBehaviour
     }
 
     public Button GetItemButton() => buyButton;
+
+    private void OnDisable()
+    {
+        buyButton.onClick.RemoveListener(TryBuySellItem);
+    }
 }

@@ -35,4 +35,9 @@ public class PlayerInventoryManager : MonoBehaviour
         currentInventoryItems.Remove(item);
         OnItemEquipped?.Invoke(item);
     }
+
+    private void OnDisable()
+    {
+        PlayerData.OnInventoryChange -= UploadInventoryItems;
+    }
 }

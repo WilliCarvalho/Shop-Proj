@@ -110,4 +110,10 @@ public class ShopManager : MonoBehaviour
         buyResultText.color = textColor;
         buyResultText.gameObject.SetActive(value);
     }
+
+    private void OnDisable()
+    {
+        PlayerData.OnInventoryChange -= PopulateSellDisplay;
+        PlayerData.OnMoneyBalanceChange -= UpdateMoneyBalanceText;
+    }
 }

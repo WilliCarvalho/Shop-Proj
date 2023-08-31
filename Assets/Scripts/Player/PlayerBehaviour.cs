@@ -76,6 +76,12 @@ public class PlayerBehaviour : MonoBehaviour
     }
     private void OnDisable()
     {
+        playerInputs.PlayerMove.Move.started -= OnMoveInput;
+        playerInputs.PlayerMove.Move.performed -= OnMoveInput;
+        playerInputs.PlayerMove.Move.canceled -= OnMoveInput;
+
+        playerInputs.PlayerMove.Inventory.started -= OnInventoryInput;
+        playerInputs.PlayerMove.Inventory.started -= OnInventoryInput;
         playerInputs.Disable();
     }
 }

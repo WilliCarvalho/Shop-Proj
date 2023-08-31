@@ -67,4 +67,11 @@ public class PlayerData : MonoBehaviour
     }
 
     public List<ShopItem> GetplayerItems() => playerInventory.GetItems();
+
+    private void OnDisable()
+    {
+        ShopManager.OnShopItemPurchased -= AddItemToInventory;
+        ShopManager.OnShopItemSelled -= RemoveItemfromInventory;
+        PlayerInventoryManager.OnItemEquipped -= EquipNewItemToPlayer;
+    }
 }
